@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  /* Search Form */
+  .search-form {
+    background: linear-gradient(135deg, #F05A58, #FF7F50);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 1000px;
+    width: 100%;
+  }
+  
+  .search-form .form-control {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 10px;
+  }
+  
+  .search-form .input-group-text {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
+  
+  .search-form button {
+    border-radius: 10px;
+    background-color: #fff;
+    color: #F05A58;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .search-form button:hover {
+    background-color: #F05A58;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  
+  /* Buses List */
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .btn-danger {
+    background-color: #F05A58;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-danger:hover {
+    background-color: #ff7f50;
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .search-form .row {
+      flex-direction: column;
+    }
+  
+    .search-form .col-md-3,
+    .search-form .col-md-2 {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .search-form button {
+      width: 100%;
+    }
+  }
