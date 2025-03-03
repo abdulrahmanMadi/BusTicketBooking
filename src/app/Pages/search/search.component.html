@@ -99,8 +99,13 @@
                 </div>
 
                 <div class="col-md-3">
-                  <button class="btn btn-danger fw-bold w-100">VIEW SEATS</button>
-                </div>
+                  <button
+                  class="btn btn-danger fw-bold w-100"
+                  [routerLink]="['/booking', item.scheduleId]"
+                  routerLinkActive="router-link-active">
+                  Book
+                </button>
+                                </div>
 
               </div>
             </div>

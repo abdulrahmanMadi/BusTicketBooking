@@ -1,0 +1,76 @@
+/* Seats styling */
+.seat {
+    border-radius: 8px;
+    margin: 5px 0;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  /* Seat types */
+  .seat.reserved {
+    background-color: #6c757d; /* Gray */
+    cursor: not-allowed;
+  }
+  
+  .seat.available {
+    background-color: #198754; /* Green */
+  }
+  
+  .seat.selected {
+    background-color: #dc3545; /* Red */
+  }
+  
+  /* On hover */
+  .seat.available:hover,
+  .seat.selected:hover {
+    opacity: 0.85;
+  }
+  
+  /* Passenger details inputs */
+  #booking-form input.form-control,
+  #booking-form select.form-control {
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-top: 4px;
+  }
+  
+  /* Section titles */
+  #booking-form h4,
+  #booking-form h5 {
+    font-weight: bold;
+  }
+  
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    #booking-form .col-4,
+    #booking-form .col-3,
+    #booking-form .col-2 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    #booking-form .seat {
+      width: 100%;
+    }
+  }
+  
+  /* Divider line */
+  #booking-form hr {
+    border-top: 2px solid #dee2e6;
+    margin: 15px 0;
+  }
+  
+  /* Placeholder message */
+  #booking-form p {
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+  
+  /* Passenger form rows */
+  #booking-form .row {
+    margin-bottom: 10px;
+  }
+  

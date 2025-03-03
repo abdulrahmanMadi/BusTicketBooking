@@ -4,7 +4,7 @@ import { BookingComponent } from './Pages/booking/booking.component';
 
 export const routes: Routes = [
     {
-        path: 'search',
+        path: '',
         redirectTo:'search',
         pathMatch: 'full'
     },
@@ -14,7 +14,7 @@ export const routes: Routes = [
     }
     ,
     {
-        path: 'booking',
+        path: 'booking/:id',
        component: BookingComponent
     }
 ];
