@@ -1,91 +1,134 @@
-/* General Styles */
+/* General */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* Header */
+header h1 {
+  font-size: 2.8rem;
+}
+
+header p {
+  font-size: 1.1rem;
+}
+
+/* Search Form */
+.search-form {
+  background: linear-gradient(135deg, #F05A58, #FF7F50);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 1100px;
+  width: 100%;
+  gap: 15px;
+}
+
+.search-form .form-control, 
+.search-form .form-select {
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: none;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+.search-form .input-group-text {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.search-form button {
+  border-radius: 12px;
+  background-color: #fff;
+  color: #F05A58;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #F05A58;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Buses List */
+.card {
+  border: none;
+  border-radius: 18px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  font-size: 1.6rem;
+  color: #222;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card-body .col-md-2 {
+  padding: 15px 0;
+  border-right: 1px solid #eee;
+}
+
+.card-body .col-md-2:last-child {
+  border-right: none;
+}
+
+.btn-danger {
+  background-color: #F05A58;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #FF7F50;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-form .row {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  /* Search Form */
-  .search-form {
-    background: linear-gradient(135deg, #F05A58, #FF7F50);
-    padding: 20px;
-    border-radius: 20px;
-    max-width: 1000px;
+
+  .search-form .col-md-3,
+  .search-form .col-md-2,
+  .search-form .col-md-1 {
     width: 100%;
   }
-  
-  .search-form .form-control {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-    padding: 10px;
+
+  .card-body .col-md-2 {
+    border-right: none;
   }
-  
-  .search-form .input-group-text {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-  }
-  
-  .search-form button {
-    border-radius: 10px;
-    background-color: #fff;
-    color: #F05A58;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .search-form button:hover {
-    background-color: #F05A58;
-    color: #fff;
-    transform: translateY(-2px);
-  }
-  
-  /* Buses List */
-  .card {
-    border: none;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-title {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .card-text {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .btn-danger {
-    background-color: #F05A58;
-    border: none;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-danger:hover {
-    background-color: #ff7f50;
-    transform: translateY(-2px);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .search-form .row {
-      flex-direction: column;
-    }
-  
-    .search-form .col-md-3,
-    .search-form .col-md-2 {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    .search-form button {
-      width: 100%;
-    }
-  }
+}
+.card-body p {
+  font-size: 0.95rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+#buses-list .card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
