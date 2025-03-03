@@ -26,6 +26,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -34,11 +36,19 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-
-
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/assets/vendors/owl-carousel/css/owl.carousel.min.css",
+              "src/assets/vendors/owl-carousel/css/owl.theme.default.css",
+              "src/assets/vendors/mdi/css/materialdesignicons.min.css",
+              "src/assets/vendors/aos/css/aos.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/vendors/jquery/jquery.min.js",
+        "src/assets/vendors/bootstrap/bootstrap.min.js",
+        "src/assets/vendors/owl-carousel/js/owl.carousel.min.js",
+        "src/assets/vendors/aos/js/aos.js",
+        "src/assets/js/landingpage.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -94,15 +104,29 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/assets/vendors/owl-carousel/css/owl.carousel.min.css",
+              "src/assets/vendors/owl-carousel/css/owl.theme.default.css",
+              "src/assets/vendors/mdi/css/materialdesignicons.min.css",
+              "src/assets/vendors/aos/css/aos.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendors/jquery/jquery.min.js",
+              "src/assets/vendors/bootstrap/bootstrap.min.js",
+              "src/assets/vendors/owl-carousel/js/owl.carousel.min.js",
+              "src/assets/vendors/aos/js/aos.js",
+              "src/assets/js/landingpage.js"
+            ]
           }
         }
       }

@@ -1,0 +1,177 @@
+/* Navbar Base Style */
+.navbar {
+  background-color: #f7f8fa;
+  padding: 12px 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  animation: slideDown 0.6s ease-in-out;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Optional subtle border */
+}
+
+/* Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* On scroll smaller effect (optional if you want shrinking navbar) */
+.navbar.scrolled {
+  padding: 8px 20px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Navbar Brand Logo */
+.navbar-brand-wrapper img {
+  height: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Shrink logo on scroll */
+.navbar.scrolled .navbar-brand-wrapper img {
+  height: 40px;
+}
+.navbar-brand-wrapper span,
+.navbar-collapse-logo span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #dc3545;
+}
+.text-gradient {
+  background: linear-gradient(135deg, #dc3545, #ff7f50); /* Red to Coral */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.navbar {
+  background-color: #f7f8fa;
+  padding: 10px 0 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #dc3545, #ff7f50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+/* General improvements */
+h1, h3, h5 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.banner {
+  background: linear-gradient(135deg, #f7f8fa, #eaf0f9);
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+}
+
+.banner h1 {
+  font-size: 3rem;
+  color: #333;
+  animation: fadeInDown 1s ease;
+}
+
+.banner h6 {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.banner img {
+  max-width: 500px;
+  margin-top: 40px;
+  animation: fadeInUp 1s ease;
+}
+
+/* Buttons */
+.btn-opacity-light, .btn-opacity-success, .btn-info {
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-opacity-light:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-3px);
+}
+
+.btn-opacity-success:hover {
+  background-color: #28a745;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn-info:hover {
+  background-color: #007bff;
+  transform: translateY(-3px);
+}
+
+/* How It Works */
+.features-overview {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.features-width {
+  background: #f9fafb;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.features-width:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.img-icons {
+  width: 80px;
+  padding: 15px;
+  background-color: #eaf0f9;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+/* Digital Marketing Section */
+.digital-marketing-service {
+  padding: 100px 0;
+  background: #f7f8fa;
+}
+
+.digital-marketing-service h3 {
+  font-size: 2rem;
+}
+
+.digital-marketing-service img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

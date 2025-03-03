@@ -1,0 +1,37 @@
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <h2 class="register-title">Create Your Account 🚀</h2>
+    <p class="register-subtitle">Join us and start your journey today.</p>
+
+    <div class="form-group">
+      <label for="userName">Username</label>
+      <input type="text" id="userName" formControlName="userName" placeholder="Choose a username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="emailId">Email</label>
+      <input type="email" id="emailId" formControlName="emailId" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" formControlName="fullName" placeholder="Enter your full name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="Create a password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contactNo">Contact Number (Optional)</label>
+      <input type="text" id="contactNo" formControlName="contactNo" placeholder="Optional phone number">
+    </div>
+
+    <button type="submit">Register</button>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <p class="login-text">Already have an account? <a href="/login">Login here</a></p>
+  </form>
+</div>

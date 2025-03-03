@@ -1,0 +1,183 @@
+<!-- Add CSS files -->
+<link rel="stylesheet" href="../../../assets/vendors/owl-carousel/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../../../assets/vendors/owl-carousel/css/owl.theme.default.css">
+<link rel="stylesheet" href="../../../assets/vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="../../../assets/vendors/aos/css/aos.css">
+<link rel="stylesheet" href="../../../assets/css/style.min.css">
+
+<!-- Add JS files -->
+<script src="../../../assets/vendors/jquery/jquery.min.js"></script>
+<script src="../../../assets/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="../../../assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
+<script src="../../../assets/vendors/aos/js/aos.js"></script>
+<script src="../../../assets/js/landingpage.js"></script>
+<header id="header-section">
+  <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
+    <div class="container d-flex align-items-center">
+      
+      <!-- Logo -->
+      <div class="d-flex align-items-center">
+        <img src="./assets/images/buslogo.png" alt="Bus Booking Logo" style="height: 50px;">
+        <span class="ml-2 h4 mb-0 fw-bold text-gradient">BusGo</span>
+      </div>
+  
+      <!-- Toggler for mobile -->
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="mdi mdi-menu navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item px-2">
+            <a class="nav-link" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item px-2">
+            <a class="nav-link" routerLink="/about">About</a>
+          </li>
+          <li class="nav-item px-2">
+            <a class="nav-link" routerLink="/routes">Routes</a>
+          </li>
+          <li class="nav-item px-2">
+            <a class="nav-link" routerLink="/testimonials">Testimonials</a>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="d-flex align-items-center">
+        <!-- Logged In State -->
+        <div *ngIf="isLoggedIn; else notLoggedInTemplate">
+          <p class="mb-0 me-3">Welcome, {{ userName }}!</p>
+          <button class="btn btn-danger" (click)="logout()">Logout</button>
+        </div>
+      
+        <!-- Not Logged In State -->
+        <ng-template #notLoggedInTemplate>
+          <p class="mb-0 me-3">Please log in to continue.</p>
+          <a class="btn btn-outline-danger me-2" routerLink="/login">Login</a>
+          <a class="btn btn-danger" routerLink="/register">Register</a>
+        </ng-template>
+      </div>
+  
+    </div>
+  </nav>
+</header>
+
+<div class="banner">
+  <div class="container">
+    <h1 class="font-weight-semibold">Book Your Bus Tickets<br>Across Egypt.</h1>
+    <h6 class="font-weight-normal text-muted pb-3">Travel across Egypt with ease. Book your bus tickets online and enjoy a hassle-free journey.</h6>
+    <div>
+      <button class="btn btn-opacity-light mr-1">Book Now</button>
+      <button class="btn btn-opacity-success ml-1">Learn More</button>
+    </div>
+    <img src="./assets/images/19199008-removebg-preview.png" alt="Bus Booking Banner" class="img-fluid">
+  </div>
+</div>
+
+<div class="content-wrapper">
+  <div class="container">
+    <section class="features-overview" id="features-section">
+      <div class="content-header">
+        <h2>How It Works</h2>
+        <h6 class="section-subtitle text-muted">Simple steps to book your bus tickets and travel across Egypt.</h6>
+      </div>
+      <div class="d-md-flex justify-content-between">
+        <div class="grid-margin d-flex justify-content-start">
+          <div class="features-width">
+            <img src="./assets/images/Group12.svg" alt="Search Icon" class="img-icons">
+            <h5 class="py-3">Search & Select<br>Your Route</h5>
+            <p class="text-muted">Find the best routes and schedules for your journey across Egypt.</p>
+            <a href="#"><p class="readmore-link">Read More</p></a>
+          </div>
+        </div>
+        <div class="grid-margin d-flex justify-content-center">
+          <div class="features-width">
+            <img src="./assets/images/Group7.svg" alt="Payment Icon" class="img-icons">
+            <h5 class="py-3">Secure Payment<br>Options</h5>
+            <p class="text-muted">Pay securely using multiple payment methods for a hassle-free booking experience.</p>
+            <a href="#"><p class="readmore-link">Read More</p></a>
+          </div>
+        </div>
+        <div class="grid-margin d-flex justify-content-end">
+          <div class="features-width">
+            <img src="./assets/images/Group5.svg" alt="Ticket Icon" class="img-icons">
+            <h5 class="py-3">Get Your Ticket<br>Instantly</h5>
+            <p class="text-muted">Receive your e-ticket instantly via email or SMS. Board the bus with ease.</p>
+            <a href="#"><p class="readmore-link">Read More</p></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="digital-marketing-service" id="digital-marketing-section">
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-7 grid-margin grid-margin-lg-0" data-aos="fade-right">
+          <h3 class="m-0">Explore Egypt with Our<br>Comfortable Bus Services!</h3>
+          <div class="col-lg-7 col-xl-6 p-0">
+            <p class="py-4 m-0 text-muted">Travel to popular destinations like Cairo, Alexandria, Luxor, and more with our reliable bus services.</p>
+            <p class="font-weight-medium text-muted">Enjoy comfortable seats, onboard amenities, and affordable prices.</p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 p-0 img-digital grid-margin grid-margin-lg-0" data-aos="fade-left">
+          <img src="./assets/images/12291364_Wavy_Tsp-03_Single-02-removebg-preview.png" alt="Bus Service" class="img-fluid">
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-7 text-center flex-item grid-margin" data-aos="fade-right">
+          <img src="./assets/images/11667297_20945990-removebg-preview.png" alt="Bus Routes" class="img-fluid">
+        </div>
+        <div class="col-12 col-lg-5 flex-item grid-margin" data-aos="fade-left">
+          <h3 class="m-0">Leading Bus Booking Platform<br>in Egypt.</h3>
+          <div class="col-lg-9 col-xl-8 p-0">
+            <p class="py-4 m-0 text-muted">Book your bus tickets online and enjoy a seamless travel experience across Egypt.</p>
+            <p class="pb-2 font-weight-medium text-muted">Our platform offers real-time updates, secure payments, and 24/7 customer support.</p>
+          </div>
+          <button class="btn btn-info">Read More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="customer-feedback" id="feedback-section">
+      <div class="row">
+        <div class="col-12 text-center pb-5">
+          <h2>What Our Customers Say</h2>
+          <h6 class="section-subtitle text-muted m-0">Hear from our satisfied customers who have traveled with us.</h6>
+        </div>
+        <div class="owl-carousel owl-theme grid-margin">
+          <div class="card customer-cards">
+            <div class="card-body">
+              <div class="text-center">
+                <img src="./assets/images/face2.jpg" width="89" height="89" alt="Customer" class="img-customer">
+                <p class="m-0 py-3 text-muted">"The bus was comfortable, and the journey was smooth. Highly recommended!"</p>
+                <div class="content-divider m-auto"></div>
+                <h6 class="card-title pt-3">Ahmed Ali</h6>
+                <h6 class="customer-designation text-muted m-0">Traveler</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section class="contact-us" id="contact-section">
+      <div class="contact-us-bgimage grid-margin">
+        <div class="pb-4">
+          <h4 class="px-3 px-md-0 m-0" data-aos="fade-down">Need Help with Booking?</h4>
+          <h4 class="pt-1" data-aos="fade-down">Contact Us</h4>
+        </div>
+        <div data-aos="fade-up">
+          <button class="btn btn-rounded btn-outline-danger">Contact Us</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="border-top">
+      <p class="text-center text-muted pt-4">Copyright © 2023 Bus Booking Egypt. All rights reserved.</p>
+    </footer>
+  </div>
+</div>
