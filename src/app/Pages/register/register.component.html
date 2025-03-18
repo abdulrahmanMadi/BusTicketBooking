@@ -5,33 +5,35 @@
 
     <div class="form-group">
       <label for="userName">Username</label>
-      <input type="text" id="userName" formControlName="userName" placeholder="Choose a username" required>
+      <input type="text" id="userName" formControlName="userName" class="form-control" placeholder="Choose a username" required>
     </div>
 
     <div class="form-group">
       <label for="emailId">Email</label>
-      <input type="email" id="emailId" formControlName="emailId" placeholder="Enter your email" required>
+      <input type="email" id="emailId" formControlName="emailId" class="form-control" placeholder="Enter your email" required>
     </div>
 
     <div class="form-group">
       <label for="fullName">Full Name</label>
-      <input type="text" id="fullName" formControlName="fullName" placeholder="Enter your full name" required>
+      <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter your full name" required>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" placeholder="Create a password" required>
+      <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create a password" required>
     </div>
 
     <div class="form-group">
       <label for="contactNo">Contact Number (Optional)</label>
-      <input type="text" id="contactNo" formControlName="contactNo" placeholder="Optional phone number">
+      <input type="text" id="contactNo" formControlName="contactNo" class="form-control" placeholder="Optional phone number">
     </div>
 
-    <button type="submit">Register</button>
+    <button type="submit" class="btn-register">Register</button>
+@if (errorMessage ) {
+  <div *ngIf="" class="error-message">{{ errorMessage }}</div>
 
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+}
 
-    <p class="login-text">Already have an account? <a href="/login">Login here</a></p>
+    <p class="register-footer">Already have an account? <a routerLink="/login">Login here</a></p>
   </form>
 </div>

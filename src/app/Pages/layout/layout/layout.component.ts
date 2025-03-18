@@ -1,19 +1,16 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
-import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { AuthService } from '../../../Services/auth.service';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterOutlet],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  imports: [RouterOutlet,RouterLink],
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.scss'
 })
-export class HomeComponent implements OnInit {
-
-    isLoggedIn: boolean = false;
+export class LayoutComponent {
+  isLoggedIn: boolean = false;
     userName: string = '';
   
     constructor(private authService: AuthService, private router: Router) {}
@@ -40,4 +37,4 @@ export class HomeComponent implements OnInit {
       this.authService.logout();
       this.router.navigate(['/login']);
     }
-  }
+}
