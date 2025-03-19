@@ -4,53 +4,81 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { isPlatformBrowser } from '@angular/common';
+import { APIResponse, LoginRequest, RegisterRequest, User } from '../models/commonModels';
+import { apiEndPoint } from '../core/constants/constans';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7110/api/Authentication'; // Replace with your API URL
   private jwtHelper = new JwtHelperService();
   private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
+  private encryptionKey = '8ec7779d-26e9-4529-985d-0b4fecdb4b1d'; // Replace with a secure key
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object // Inject PLATFORM_ID
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
+
+  // Check if the token is a valid JWT
+  isValidJwt(token: string | null): boolean {
+    if (!token) return false;
+    const parts = token.split('.');
+    return parts.length === 3; // A valid JWT has 3 parts
+  }
 
   // Check if user is logged in
   isLoggedIn(): boolean {
-    if (isPlatformBrowser(this.platformId)) { // Check if running in the browser
-      const token = localStorage.getItem('token');
-      return !!token && !this.jwtHelper.isTokenExpired(token);
+    if (isPlatformBrowser(this.platformId)) {
+      const token = this.getToken();
+      return !!token && this.isValidJwt(token) && !this.jwtHelper.isTokenExpired(token);
     }
-    return false; // Return false if not in the browser
+    return false;
   }
 
   // Save tokens to local storage
   saveTokens(token: string, refreshToken: string): void {
-    if (isPlatformBrowser(this.platformId)) { // Check if running in the browser
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken);
+    if (isPlatformBrowser(this.platformId)) {
+      const encryptedToken = CryptoJS.AES.encrypt(token, this.encryptionKey).toString();
+      const encryptedRefreshToken = CryptoJS.AES.encrypt(refreshToken, this.encryptionKey).toString();
+
+      localStorage.setItem('token', encryptedToken);
+      localStorage.setItem('refreshToken', encryptedRefreshToken);
+
+      // Update login status
       this.loggedIn.next(true);
     }
   }
 
-  // Get current user
-  getCurrentUser(): any {
-    if (isPlatformBrowser(this.platformId)) { // Check if running in the browser
-      const token = localStorage.getItem('token');
-      if (token) {
-        return this.jwtHelper.decodeToken(token);
-      }
+  // Get the decrypted token
+  getToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      const encryptedToken = localStorage.getItem('token');
+      if (!encryptedToken) return null;
+
+      const bytes = CryptoJS.AES.decrypt(encryptedToken, this.encryptionKey);
+      return bytes.toString(CryptoJS.enc.Utf8);
     }
     return null;
   }
 
+  // Decode JWT Token
+  getDecodedToken(): any {
+    const token = this.getToken();
+    if (!token || !this.isValidJwt(token)) return null;
+    return this.jwtHelper.decodeToken(token);
+  }
+
+  // Get current user
+  getCurrentUser(): any {
+    return this.getDecodedToken();
+  }
+
   // Logout
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) { // Check if running in the browser
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       this.loggedIn.next(false);
@@ -64,24 +92,12 @@ export class AuthService {
   }
 
   // Login
-  login(loginRequest: { userName: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, loginRequest);
+  login(payload: LoginRequest): Observable<APIResponse<User>> {
+    return this.http.post<APIResponse<User>>(`${apiEndPoint.Auth.Login}`, payload);
   }
 
   // Register
-  register(registerRequest: {
-    userName: string;
-    emailId: string;
-    fullName: string;
-    roleId: number;
-    password: string;
-    contactNo?: string; // Optional for vendors
-  }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, registerRequest);
-  }
-
-  // Refresh Token
-  refreshToken(refreshToken: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/refresh-token`, { refreshToken });
+  register(payload: RegisterRequest): Observable<APIResponse<User>> {
+    return this.http.post<APIResponse<User>>(`${apiEndPoint.Auth.Register}`, payload);
   }
 }

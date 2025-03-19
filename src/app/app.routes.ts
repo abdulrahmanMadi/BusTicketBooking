@@ -13,8 +13,8 @@ export const routes: Routes = [
     { path: 'Home', component: HomeComponent }, 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-  //   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] }, 
-  //   { path: 'booking/:id', component: BookingComponent, canActivate: [AuthGuard] },
+    { path: 'search', component: SearchComponent, canActivate: [AuthGuard] }, 
+    { path: 'booking/:id', component: BookingComponent, canActivate: [AuthGuard] },
    ]},
 
  

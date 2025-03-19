@@ -20,20 +20,20 @@ export class HomeComponent implements OnInit {
   
     ngOnInit(): void {
       // Subscribe to login status changes
-      this.authService.isLoggedIn$.subscribe((loggedIn) => {
-        this.isLoggedIn = loggedIn;
-        if (loggedIn) {
-          const user = this.authService.getCurrentUser();
-          this.userName = user?.userName || '';
-        }
-      });
+      // this.authService.isLoggedIn$.subscribe((loggedIn) => {
+      //   this.isLoggedIn = loggedIn;
+      //   if (loggedIn) {
+      //     const user = this.authService.getCurrentUser();
+      //     this.userName = user?.userName || '';
+      //   }
+      // });
   
-      // Initial check
-      this.isLoggedIn = this.authService.isLoggedIn();
-      if (this.isLoggedIn) {
-        const user = this.authService.getCurrentUser();
-        this.userName = user?.userName || '';
-      }
+      // // Initial check
+      // this.isLoggedIn = this.authService.isLoggedIn();
+      // if (this.isLoggedIn) {
+      //   const user = this.authService.getCurrentUser();
+      //   this.userName = user?.userName || '';
+      // }
     }
   
     logout(): void {
