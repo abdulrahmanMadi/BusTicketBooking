@@ -7,7 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports:[FormsModule,HttpClientModule,ReactiveFormsModule],
+  imports:[FormsModule,CommonModule,HttpClientModule,ReactiveFormsModule],
   templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
