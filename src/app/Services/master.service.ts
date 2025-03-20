@@ -27,7 +27,9 @@ export class MasterService {
       })
     );
   }
-  
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.ApiUrl}User/GetUserById/${userId}`);
+  }
   getBookingHistory(customerId: number): Observable<any> {
     return this.http.get<any>(`${this.ApiUrl}BusBooking/GetBusBookingsByCustomerId/${customerId}`);
   }

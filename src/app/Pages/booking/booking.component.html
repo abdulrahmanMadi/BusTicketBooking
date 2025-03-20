@@ -1,105 +1,109 @@
-<section id="booking-form" style="margin-top: 150px;margin-bottom: 150px;">
-    <div class="container mt-5">
-      <div class="row">
-        <!-- Bus Seat Layout -->
-        <div class="col-md-5">
-          <div class="bus-container">
-            <div class="bus">
-              <div class="seats">
-                <div *ngFor="let row of seatRows; let rowIndex = index" class="seat-row">
+<section id="booking-form" style="margin-top: 150px; margin-bottom: 150px;">
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Bus Seat Layout -->
+      <div class="col-md-5">
+        <div class="bus-container">
+          <div class="bus">
+            <div class="seats">
+              @for (row of seatRows; track row; let rowIndex = $index) {
+                <div class="seat-row">
                   <!-- Left Side (2 Seats) -->
-                  <div *ngFor="let seatNo of row.slice(0,2); let colIndex = index">
-                    <div 
+                  @for (seatNo of row.slice(0, 2); track seatNo; let colIndex = $index) {
+                    <div
                       class="seat"
                       [class.reserved]="checkIfSeatBooked(seatNo)"
                       [class.selected]="checkIsSeatSelected(seatNo)"
                       [class.available]="!checkIfSeatBooked(seatNo) && !checkIsSeatSelected(seatNo)"
-                      (click)="selectSeat(seatNo)">
+                      (click)="selectSeat(seatNo)"
+                    >
                       {{ seatNo }}
                     </div>
-                  </div>
-              
+                  }
+
                   <!-- Aisle Space -->
                   <div class="aisle"></div>
-              
+
                   <!-- Right Side (2 Seats) -->
-                  <div *ngFor="let seatNo of row.slice(2,4); let colIndex = index">
-                    <div 
+                  @for (seatNo of row.slice(2, 4); track seatNo; let colIndex = $index) {
+                    <div
                       class="seat"
                       [class.reserved]="checkIfSeatBooked(seatNo)"
                       [class.selected]="checkIsSeatSelected(seatNo)"
                       [class.available]="!checkIfSeatBooked(seatNo) && !checkIsSeatSelected(seatNo)"
-                      (click)="selectSeat(seatNo)">
+                      (click)="selectSeat(seatNo)"
+                    >
                       {{ seatNo }}
                     </div>
-                  </div>
+                  }
                 </div>
-              </div>
-              <div class="driver-seat">🚌</div>
+              }
+            </div>
+            <div class="driver-seat">🚌</div>
+          </div>
+        </div>
 
+        <!-- Seat Legend -->
+        <div class="seat-legend text-center mt-3">
+          <div class="legend-item">
+            <span class="seat reserved"></span>
+            <span class="legend-text">Booked</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat available"></span>
+            <span class="legend-text">Available</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat selected"></span>
+            <span class="legend-text">Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passenger Details Form -->
+      <div class="col-md-7">
+        <h4 class="text-center mb-3">Passenger Details</h4>
+
+        <!-- Show message if no seats are selected -->
+        @if (userSelectedSeatArray.length === 0) {
+          <div class="alert alert-warning text-center">
+            Please select seats to enter passenger details.
+          </div>
+        }
+
+        <!-- Passenger form for each selected seat -->
+        @for (item of userSelectedSeatArray; track item.seatNo; let i = $index) {
+          <div class="passenger-form p-3">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Passenger Name</label>
+                <input type="text" [(ngModel)]="item.passengerName" class="form-control" placeholder="Enter Name" required>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Age</label>
+                <input type="number" [(ngModel)]="item.age" class="form-control" min="1" placeholder="Age" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Gender</label>
+                <select [(ngModel)]="item.gender" class="form-select" required>
+                  <option value="" disabled>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Seat No</label>
+                <input disabled type="text" [(ngModel)]="item.seatNo" class="form-control">
+              </div>
             </div>
           </div>
-  
-     <!-- Seat Legend -->
-<div class="seat-legend text-center mt-3">
-    <div class="legend-item">
-      <span class="seat reserved"></span>
-      <span class="legend-text">Booked</span>
-    </div>
-    <div class="legend-item">
-      <span class="seat available"></span>
-      <span class="legend-text">Available</span>
-    </div>
-    <div class="legend-item">
-      <span class="seat selected"></span>
-      <span class="legend-text">Selected</span>
-    </div>
-  </div>
-  
-        </div>
-  
-       <!-- Passenger Details Form -->
-<div class="col-md-7">
-    <h4 class="text-center mb-3">Passenger Details</h4>
-  
-    <!-- Show message if no seats are selected -->
-    <div *ngIf="userSelectedSeatArray.length === 0" class="alert alert-warning text-center">
-      Please select seats to enter passenger details.
-    </div>
-  
-    <!-- Passenger form for each selected seat -->
-    <div *ngFor="let item of userSelectedSeatArray; let i = index" class="passenger-form p-3">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label">Passenger Name</label>
-          <input type="text" [(ngModel)]="item.passengerName" class="form-control" placeholder="Enter Name" required>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Age</label>
-          <input type="number" [(ngModel)]="item.age" class="form-control" min="1" placeholder="Age" required>
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Gender</label>
-          <select [(ngModel)]="item.gender" class="form-select" required>
-            <option value="" disabled>Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Seat No</label>
-          <input disabled type="text" [(ngModel)]="item.seatNo" class="form-control">
+        }
+
+        <!-- Book Now Button -->
+        <div class="text-center mt-4">
+          <button class="btn btn-success px-4 py-2 fw-bold" (click)="bookNow()">Book Now</button>
         </div>
       </div>
     </div>
-  
-    <!-- Book Now Button -->
-    <div class="text-center mt-4">
-      <button class="btn btn-success px-4 py-2 fw-bold" (click)="bookNow()">Book Now</button>
-    </div>
   </div>
-  
-      </div>
-    </div>
-  </section>
-  
+</section>
