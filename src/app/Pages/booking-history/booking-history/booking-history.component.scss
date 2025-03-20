@@ -1,0 +1,159 @@
+
+
+
+.container {
+  max-width: 1350px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.item {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 48%;
+  float: left;
+  padding: 0 20px;
+  background: #fff;
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Border shadow */
+  border: 2px solid #f1f1f1; /* Light border */
+  transition: 0.3s ease-in-out;
+}
+.item:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: translateY(-3px);
+}
+.item-right, .item-left {
+  float: left;
+  padding: 20px;
+}
+
+.item-right {
+  padding: 79px 50px;
+  margin-right: 20px;
+  width: 25%;
+  position: relative;
+  height: 286px;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 10px 0 0 10px;
+}
+
+.item-right .num {
+  font-size: 60px;
+  color: #dc3545;
+}
+
+.item-right .day {
+  font-size: 25px;
+  color: #555;
+}
+
+.item-right .up-border, .item-right .down-border {
+  padding: 14px 15px;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.item-right .up-border {
+  top: -8px;
+  right: -35px;
+}
+
+.item-right .down-border {
+  bottom: -13px;
+  right: -35px;
+}
+
+.item-left {
+  width: 71%;
+  padding: 34px 0px 19px 46px;
+  border-left: 3px dotted #999;
+}
+
+.item-left .title {
+  color: #111;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.item-left .sce, .item-left .loc {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  color: #888;
+}
+
+.item-left .icon {
+  font-size: 20px;
+  color: #666;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.booked {
+  color: #fff;
+  background-color: #dc3545;
+  padding: 8px 14px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.seat-badge {
+  display: flex;
+  align-items: center;
+  background: #dc3545;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 20px;
+  width: fit-content;
+  font-weight: bold;
+  margin-top: 12px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.seat-badge i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+/* Booked At UI Enhancement */
+.booking-info {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: fit-content;
+  font-weight: 600;
+  font-size: 15px;
+  color: #555;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.booking-info i {
+  font-size: 18px;
+  color: #dc3545;
+  margin-right: 8px;
+}
+
+.booking-info p {
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.booking-date {
+  background: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-left: 6px;
+  font-size: 14px;
+  font-weight: bold;
+}

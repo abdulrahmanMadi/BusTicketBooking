@@ -1,0 +1,63 @@
+<!-- Booking History Container -->
+<div class="container" style="margin-top: 100px;">
+  <!-- Header -->
+  <header class="my-5 text-center">
+    <h1 class="display-4 fw-bold text-danger"><i class="fa-solid fa-ticket"></i> My Booking Tickets</h1>
+  </header>
+  
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3 text-muted">Fetching your bookings...</p>
+  </div>
+
+  <!-- No Bookings Found -->
+  <div *ngIf="!loading && bookingHistory.length === 0" class="alert alert-warning text-center">
+    😔 You haven't booked any buses yet.
+  </div>
+
+  <!-- Booking List -->
+  <div *ngIf="!loading && bookingHistory.length > 0">
+    <div class="item" *ngFor="let booking of bookingHistory">
+      <!-- Left Section (Date) -->
+      <div class="item-right">
+        <h2 class="num">{{ booking.schedule?.departureTime | date: 'dd' }}</h2>
+        <p class="day">{{ booking.schedule?.departureTime | date: 'MMM' }}</p>
+        <span class="up-border"></span>
+        <span class="down-border"></span>
+      </div>
+
+      <!-- Right Section (Booking Info) -->
+      <div class="item-left">
+        <h2 class="title">🚌 {{ booking.schedule?.busName }}</h2>
+
+        <div class="sce">
+          <div class="icon"><i class="fa fa-clock"></i></div>
+          <p>Departure: {{ booking.schedule?.departureTime | date: 'hh:mm a' }}</p>
+        </div>
+
+        <!-- <div class="sce">
+          <div class="icon"><i class="fa fa-calendar"></i></div>
+          <p>Booked at: {{ booking.bookingDate| date: 'dd MMM yyyy, hh:mm a'  }}</p>
+        </div> -->
+    
+        
+        <div class="loc">
+          <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+          <p>
+            <strong>From:</strong> {{ booking.schedule?.fromLocationName }} <br />
+            <strong>To:</strong> {{ booking.schedule?.toLocationName }}
+          </p>
+        </div>
+
+        <!-- Enhanced Seat Number Badge -->
+        <div class="seat-badge">
+          <i class="fa fa-chair"></i> Seat: <span>{{ booking.busBookingPassengers[0]?.seatNo }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

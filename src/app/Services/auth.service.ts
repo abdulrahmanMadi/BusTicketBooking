@@ -81,6 +81,7 @@ export class AuthService {
     console.log('Storing User Data:', userData); // Log the user data before encryption
     this.storageService.setItem('user', JSON.stringify(userData));
     this.storageService.setItem('token', data.token);
+    
   }
   public isTokenExpired(token: string): boolean {
     try {

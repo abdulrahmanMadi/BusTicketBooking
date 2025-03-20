@@ -32,3 +32,39 @@ export interface LoginRequest {
     refreshToken: string;
   }
   
+
+  export interface Passenger {
+    passengerId: number;
+    bookingId: number;
+    passengerName: string;
+    age: number;
+    gender: string;
+    seatNo: number;
+  }
+  
+  export interface Booking {
+    bookingId: number;
+    custId: number;
+    bookingDate: string;
+    scheduleId: number;
+    busBookingPassengers: Passenger[];
+    schedule?: Schedule; // Optional until fetched
+  }
+  
+  export interface Schedule {
+    scheduleId: number;
+    vendorId: number;
+    busName: string;
+    busVehicleNo: string;
+    fromLocationId: number;
+    toLocationId: number;
+    departureTime: string;
+    arrivalTime: string;
+    scheduleDate: string;
+    price: number;
+    totalSeats: number;
+    availableSeats: number;
+    fromLocationName?: string;
+    toLocationName?: string;
+  }
+  

@@ -16,7 +16,21 @@ export class MasterService {
       map(response => response.data)
     );
   }
-
+  getLocationName(): Observable<Map<number, string>> {
+    return this.http.get<any>(this.ApiUrl + 'Location/GetBusLocations').pipe(
+      map(response => {
+        const locationMap = new Map<number, string>();
+        response.data.forEach((location: { locationId: number; locationName: string }) => {
+          locationMap.set(location.locationId, location.locationName);
+        });
+        return locationMap;
+      })
+    );
+  }
+  
+  getBookingHistory(customerId: number): Observable<any> {
+    return this.http.get<any>(`${this.ApiUrl}BusBooking/GetBusBookingsByCustomerId/${customerId}`);
+  }
   searchBusLocations(from: number, to: number, travelDate: string): Observable<any[]> {
     return this.http
       .get<any>(`${this.ApiUrl}BusBooking/searchBus?from=${from}&to=${to}&date=${travelDate}`)
@@ -28,7 +42,7 @@ export class MasterService {
       .get<any>(`${this.ApiUrl}BusSchedule/GetBusScheduleById/${id}`)
       .pipe(map(response => response.data));
   }
-  
+
   getBookedSeats(id: number): Observable<any[]> {
     return this.http
       .get<any>(`${this.ApiUrl}BusBooking/getBookedSeats/${id}`)
@@ -41,5 +55,12 @@ export class MasterService {
 
   onBooking(obj: any): Observable<any> {
     return this.http.post<any>(this.ApiUrl + 'BusBooking/PostBusBooking', obj);
+  }
+
+  // Add this method to fetch bus schedules
+  getBusSchedules(): Observable<any[]> {
+    return this.http
+      .get<any>(`${this.ApiUrl}BusBooking/GetBusSchedules`)
+      .pipe(map(response => response.data));
   }
 }
