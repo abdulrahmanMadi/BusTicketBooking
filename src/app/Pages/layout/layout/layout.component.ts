@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../Services/auth.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { User } from '../../../models/commonModels';
 
 @Component({
   selector: 'app-layout',
@@ -11,30 +12,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent implements OnInit {
-  isLoggedIn: boolean = false;
-  userName: string = '';
+  isLoggedIn = false;
+  currentUser: User | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-      if (this.isLoggedIn) {
-        const user = this.authService.getCurrentUser();
-        this.userName = user?.userName || '';
-      }
-    });
-
-    // Initial check
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.checkAuthentication();
+  }
+  
+  checkAuthentication(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
     if (this.isLoggedIn) {
-      const user = this.authService.getCurrentUser();
-      this.userName = user?.userName || '';
+      this.currentUser = this.authService.getCurrentUser();
+      console.log('Current User:', this.currentUser); // Debugging
     }
   }
-
+  
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.isLoggedIn = false;
+    this.currentUser = null;
   }
 }

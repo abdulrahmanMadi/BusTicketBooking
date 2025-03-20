@@ -1,5 +1,5 @@
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../Services/auth.service';
@@ -16,72 +16,29 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   form: FormGroup;
-  AuthService = inject(AuthService);
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.form = this.fb.group({
-      userName: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
-  onSubmit() {
-    if (this.form.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Invalid Input',
-        text: 'Please fill in all required fields correctly.',
-        width: '400px'
-      });
-      return;
-    }
-
-    const formData: LoginRequest = this.form.value;
-
-    this.AuthService.login(formData).subscribe(
+  onSubmit(): void {
+    if (this.form.invalid) return;
+    this.authService.login(this.form.value).subscribe(
       (response) => {
-        if (response.result && response.data) {
-          const { token, refreshToken } = response.data;
-
-          if (token && refreshToken) {
-            this.AuthService.saveTokens(token, refreshToken);
-
-            Swal.fire({
-              icon: 'success',
-              title: 'Login Successful',
-              text: response.message,
-              width: '400px',
-              timer: 2000
-            }).then(() => {
-              this.router.navigate(['/']).then(() => window.location.reload());
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Login Failed',
-              text: 'Token or refresh token is missing.',
-              width: '400px'
-            });
-          }
+        if (response.result) {
+          window.location.href = '/';
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: response.message,
-            width: '400px'
-          });
+          this.errorMessage = response.message;
+          Swal.fire('Login Failed', response.message, 'error');
         }
       },
       (error) => {
-        const errorMessage = error.error?.message || 'Please try again later.';
-        Swal.fire({
-          icon: 'error',
-          title: 'An Error Occurred',
-          text: errorMessage,
-          width: '400px'
-        });
-        console.error('An error occurred:', error);
+        this.errorMessage = 'An error occurred. Please try again later.';
+        Swal.fire('Error', 'An error occurred. Please try again later.', 'error');
       }
     );
   }

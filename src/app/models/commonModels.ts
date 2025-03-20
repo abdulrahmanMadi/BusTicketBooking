@@ -2,6 +2,13 @@ export interface LoginRequest {
     userName: string;
     password: string;
   }
+  export interface LoginResponseDto {
+    userId: number;
+    token: string;
+    userName: string;
+    refreshToken: string;
+
+  }
   
   export interface RegisterRequest {
     userName: string;
@@ -19,6 +26,7 @@ export interface LoginRequest {
   }
   
   export interface User {
+    
     userName: string;
     token: string;
     refreshToken: string;

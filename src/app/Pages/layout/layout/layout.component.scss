@@ -179,4 +179,41 @@
 
 
 
+  .user-dropdown .btn {
+    background: #f7f8fa;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .user-dropdown .btn:hover {
+    background: #eaf0f9;
+  }
+  
+  .user-avatar {
+    font-size: 1.8rem;
+    color: #dc3545;
+  }
+  
+  .dropdown-menu {
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background: #f1f1f1;
+  }
+  
+  .dropdown-item i {
+    font-size: 1.2rem;
+  }
   

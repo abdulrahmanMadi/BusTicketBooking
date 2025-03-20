@@ -1,103 +1,93 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { isPlatformBrowser } from '@angular/common';
-import { APIResponse, LoginRequest, RegisterRequest, User } from '../models/commonModels';
-import { apiEndPoint } from '../core/constants/constans';
-import * as CryptoJS from 'crypto-js';
+import Swal from 'sweetalert2';
+
+import { StorageService } from './storage.service';
+import { APIResponse, LoginRequest, LoginResponseDto, RegisterRequest, User } from '../models/commonModels';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private jwtHelper = new JwtHelperService();
-  private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
-  private encryptionKey = '8ec7779d-26e9-4529-985d-0b4fecdb4b1d'; // Replace with a secure key
+  private baseUrl = 'https://localhost:7110/api/Authentication';
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private storageService: StorageService
   ) {}
 
-  // Check if the token is a valid JWT
-  isValidJwt(token: string | null): boolean {
-    if (!token) return false;
-    const parts = token.split('.');
-    return parts.length === 3; // A valid JWT has 3 parts
+  login(request: LoginRequest): Observable<APIResponse<LoginResponseDto>> {
+    return this.http.post<APIResponse<LoginResponseDto>>(`${this.baseUrl}/login`, request).pipe(
+      tap(response => {
+        if (response.result && response.data) {
+          this.storeUserData(response.data);
+        }
+      }),
+      catchError(error => {
+        Swal.fire('Login Failed', 'Invalid credentials or server error', 'error');
+        throw error;
+      })
+    );
   }
 
-  // Check if user is logged in
-  isLoggedIn(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
-      const token = this.getToken();
-      return !!token && this.isValidJwt(token) && !this.jwtHelper.isTokenExpired(token);
-    }
-    return false;
+  register(request: RegisterRequest): Observable<APIResponse<void>> {
+    return this.http.post<APIResponse<void>>(`${this.baseUrl}/register`, request).pipe(
+      tap(() => Swal.fire('Success', 'Registration successful!', 'success')),
+      catchError(error => {
+        Swal.fire('Registration Failed', 'Error occurred during registration', 'error');
+        throw error;
+      })
+    );
   }
 
-  // Save tokens to local storage
-  saveTokens(token: string, refreshToken: string): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const encryptedToken = CryptoJS.AES.encrypt(token, this.encryptionKey).toString();
-      const encryptedRefreshToken = CryptoJS.AES.encrypt(refreshToken, this.encryptionKey).toString();
-
-      localStorage.setItem('token', encryptedToken);
-      localStorage.setItem('refreshToken', encryptedRefreshToken);
-
-      // Update login status
-      this.loggedIn.next(true);
-    }
-  }
-
-  // Get the decrypted token
-  getToken(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      const encryptedToken = localStorage.getItem('token');
-      if (!encryptedToken) return null;
-
-      const bytes = CryptoJS.AES.decrypt(encryptedToken, this.encryptionKey);
-      return bytes.toString(CryptoJS.enc.Utf8);
-    }
-    return null;
-  }
-
-  // Decode JWT Token
-  getDecodedToken(): any {
-    const token = this.getToken();
-    if (!token || !this.isValidJwt(token)) return null;
-    return this.jwtHelper.decodeToken(token);
-  }
-
-  // Get current user
-  getCurrentUser(): any {
-    return this.getDecodedToken();
-  }
-
-  // Logout
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
-      this.loggedIn.next(false);
-      this.router.navigate(['/login']);
+    this.storageService.removeItem('user');
+    this.storageService.removeItem('token');
+    Swal.fire('Logged Out', 'You have been successfully logged out.', 'success');
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    const token = this.storageService.getItem('token');
+    return token !== null && !this.isTokenExpired(token);
+  }
+
+  getCurrentUser(): User | null {
+    const userData = this.storageService.getItem('user');
+    if (!userData) return null;
+  
+    try {
+      return JSON.parse(userData);
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      return null;
     }
   }
 
-  // Observable for login status
-  get isLoggedIn$(): Observable<boolean> {
-    return this.loggedIn.asObservable();
+  getToken(): string | null {
+    return this.storageService.getItem('token');
   }
 
-  // Login
-  login(payload: LoginRequest): Observable<APIResponse<User>> {
-    return this.http.post<APIResponse<User>>(`${apiEndPoint.Auth.Login}`, payload);
+  public storeUserData(data: LoginResponseDto): void {
+    const userData = {
+      userId: data.userId,
+      userName: data.userName,
+      token: data.token,
+      refreshToken: data.refreshToken,
+    };
+    console.log('Storing User Data:', userData); // Log the user data before encryption
+    this.storageService.setItem('user', JSON.stringify(userData));
+    this.storageService.setItem('token', data.token);
   }
-
-  // Register
-  register(payload: RegisterRequest): Observable<APIResponse<User>> {
-    return this.http.post<APIResponse<User>>(`${apiEndPoint.Auth.Register}`, payload);
+  public isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 < Date.now();
+    } catch (error) {
+      return true;
+    }
   }
 }

@@ -24,19 +24,42 @@
       </button>
 
       <div class="d-flex align-items-center">
-        <ng-container *ngIf="isLoggedIn; else notLoggedInTemplate">
-          <div>
-            <p class="mb-0 me-3">Welcome, {{ userName }}!</p>
-            <button class="btn btn-danger" (click)="logout()">Logout</button>
+        @if (isLoggedIn) {
+          <div class="dropdown user-dropdown">
+            <button class="btn btn-light d-flex align-items-center" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="mdi mdi-account-circle user-avatar"></i>
+              <span class="fw-bold text-primary ms-2">{{ currentUser?.userName }}</span>
+              <i class="mdi mdi-menu-down ms-2"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <a class="dropdown-item" routerLink="/booking/">
+                <i class="mdi mdi-bus me-2"></i> Book a Bus
+              </a>
+              <a class="dropdown-item" routerLink="/search">
+                <i class="mdi mdi-magnify me-2"></i> Search a Bus
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/profile">
+                <i class="mdi mdi-account me-2"></i> Profile
+              </a>
+              <a class="dropdown-item" routerLink="/settings">
+                <i class="mdi mdi-settings me-2"></i> Settings
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item text-danger" (click)="logout()">
+                <i class="mdi mdi-logout me-2"></i> Logout
+              </button>
+            </div>
           </div>
-        </ng-container>
-
-        <ng-template #notLoggedInTemplate>
+          
+          
+      }@else{
           <div>
+
             <a class="btn btn-outline-danger me-2" routerLink="login">Login</a>
             <a class="btn btn-danger" routerLink="register">Register</a>
           </div>
-        </ng-template>
+       }
       </div>
     </div>
   </nav>
